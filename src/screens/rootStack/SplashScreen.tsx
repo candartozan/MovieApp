@@ -6,7 +6,7 @@ export default function SplashScreen() {
   const navigate = useNavigation();
   return (
     <View>
-      <Text>SplashScreen</Text>
+      <Text className="text-5xl">SplashScreen</Text>
       <Button title="Explore" onPress={() => navigate.navigate('RootTab')} />
     </View>
   );
