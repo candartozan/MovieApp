@@ -11,7 +11,10 @@ export default function RootTab() {
   return (
     <Tab.Navigator
       initialRouteName="Explore"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {backgroundColor: '#001427'},
+      }}>
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
       <Tab.Screen name="Favorites" component={FavoritesScreen} />

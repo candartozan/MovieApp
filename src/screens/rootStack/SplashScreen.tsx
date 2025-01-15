@@ -1,15 +1,20 @@
-import {View, Text, Button} from 'react-native';
+import {View, Image, SafeAreaView} from 'react-native';
 import React from 'react';
 import {SplashScreenProps} from '../../types/navigationTypes';
+import images from '../../constants/images';
+import Button from '../../components/Button';
 
 export default function SplashScreen({navigation}: SplashScreenProps) {
   return (
-    <View>
-      <Text className="text-5xl">SplashScreen</Text>
-      <Button
-        title="Explore"
-        onPress={() => navigation.navigate('RootTab', {screen: 'Explore'})}
-      />
-    </View>
+    <SafeAreaView className="h-full w-full">
+      <Image source={images.bb8} className="h-full w-full absolute" />
+      <View className="mx-10 z-10 h-full justify-center">
+        <Button
+          title="Explore Movies"
+          onPress={() => navigation.navigate('RootTab', {screen: 'Explore'})}
+          titleClassName="text-3xl my-4"
+        />
+      </View>
+    </SafeAreaView>
   );
 }
