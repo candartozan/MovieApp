@@ -1,23 +1,27 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import React from 'react';
 import {SearchMovieType} from '../types/movieTypes';
 
 type Props = {
   movie: SearchMovieType;
+  onPressMovie?: (imdbID: string) => void;
 };
 
-const MovieCard = ({movie}: Props) => {
+const MovieCard = ({movie, onPressMovie}: Props) => {
   return (
-    <View className="w-1/2">
-      <View className="m-2 rounded-lg">
-        <Image
-          source={{uri: movie.Poster}}
-          style={{width: '100%', height: 200}}
-          resizeMode="cover"
-        />
-        <Text className="text-lg text-white">{movie.Title}</Text>
+    <TouchableWithoutFeedback
+      onPress={() => onPressMovie && onPressMovie(movie.imdbID)}>
+      <View className="w-1/2 py-3">
+        <View className="rounded-lg">
+          <Image
+            source={{uri: movie.Poster}}
+            className="h-[300px]"
+            resizeMode="contain"
+          />
+          <Text className="text-lg text-white">{movie.Title}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

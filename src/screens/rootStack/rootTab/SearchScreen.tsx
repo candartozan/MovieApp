@@ -6,8 +6,9 @@ import SearchBar from '../../../components/SearchBar';
 import useDebounce from '../../../hooks/useDebounce';
 import {SearchMovieType} from '../../../types/movieTypes';
 import useAxios from '../../../hooks/useAxios';
+import {SearchScreenProps} from '../../../types/navigationTypes';
 
-export default function SearchScreen() {
+export default function SearchScreen({navigation}: SearchScreenProps) {
   const [searchInput, setSearchInput] = useState('');
   const [movies, setMovies] = useState<SearchMovieType[]>([]);
   const dSearchInput = useDebounce(searchInput);
@@ -26,11 +27,18 @@ export default function SearchScreen() {
     search();
   }, [dSearchInput]);
 
+  const onPress = (imdbID: string) => {
+    navigation.navigate('Details', {imdbID});
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-bg-color">
       <View className="flex-1 mx-5">
         <SearchBar value={searchInput} onChangeText={setSearchInput} />
-        <MovieList movies={movies} emptyMessage="Search Movies" />
+        <MovieList
+          movies={movies}
+          onPressMovie={onPress}
+        />
       </View>
     </SafeAreaView>
   );

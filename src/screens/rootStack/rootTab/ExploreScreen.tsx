@@ -6,10 +6,6 @@ export default function ExploreScreen({navigation}: ExploreScreenProps) {
   return (
     <View>
       <Text>Explore</Text>
-      <Button
-        title="Open Modal"
-        onPress={() => navigation.navigate('Details')}
-      />
     </View>
   );
 }

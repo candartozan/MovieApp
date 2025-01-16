@@ -8,7 +8,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 export type RootStackParamList = {
   Splash: undefined;
   RootTab: NavigatorScreenParams<RootTabParamList>;
-  Details: undefined;
+  Details: {imdbID: string};
 };
 
 export type SplashScreenProps = NativeStackScreenProps<
