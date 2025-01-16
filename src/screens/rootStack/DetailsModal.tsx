@@ -1,13 +1,19 @@
-import {View, Text, Image, ScrollView} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {DetailsModalProps} from '../../types/navigationTypes';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import PillBadge from '../../components/PillBadge';
 import useAxios from '../../hooks/useAxios';
 import {Movie} from '../../types/movieTypes';
 import Rating from '../../components/Rating';
 import CastList from '../../components/CastList';
 import GenreList from '../../components/GenreList';
+import DetailsPoster from '../../components/DetailsPoster';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../redux/store';
+import {
+  addMovieToFavoritesByImdbId,
+  removeFromFavorites,
+} from '../../redux/slices/movieSlice';
 
 const moviee = {
   Title: 'Batman & Robin',
@@ -53,7 +59,10 @@ const moviee = {
 
 export default function DetailsModal({route, navigation}: DetailsModalProps) {
   const [movie, setMovie] = useState<Movie | undefined>(undefined);
+  const [isFavorite, setIsFavorite] = useState(false);
   const axios = useAxios();
+  const movies = useSelector((state: RootState) => state.movie);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -73,16 +82,35 @@ export default function DetailsModal({route, navigation}: DetailsModalProps) {
     };
 
     fetchMovie();
+
+    const favoriteMovie = movies.value.find(
+      mov => mov.imdbID === movie?.imdbID,
+    );
+
+    favoriteMovie && setIsFavorite(true);
   });
+
+  const handleAddFavorite = () => {
+    if (isFavorite) {
+      dispatch(removeFromFavorites(movie!.imdbID));
+      setIsFavorite(false);
+    } else {
+      dispatch(addMovieToFavoritesByImdbId(movie!.imdbID));
+      setIsFavorite(true);
+    }
+  };
 
   if (!movie) return null;
 
   return (
     <SafeAreaView className="flex-1 bg-bg-color">
       <ScrollView className="flex-1">
-        <View>
-          <Image source={{uri: movie.Poster}} className="h-[400px]" />
-        </View>
+        <DetailsPoster
+          posterUri={movie.Poster}
+          back={() => navigation.goBack()}
+          addFavorite={handleAddFavorite}
+          isFavorite={isFavorite}
+        />
 
         <View className="gap-2 mx-5">
           <Text className="text-3xl text-white mt-3">{movie.Title}</Text>
