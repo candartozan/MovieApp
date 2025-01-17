@@ -33,6 +33,30 @@ export const movieSlice = createSlice({
         movie => movie.imdbID !== action.payload,
       );
     },
+    addMovieToWatched: (state, action: PayloadAction<string>) => {
+      const movie = state.value.find(m => m.imdbID === action.payload);
+
+      if (movie) {
+        state.value = state.value.map(m => {
+          if (m.imdbID === movie.imdbID) {
+            m.IsWatched = true;
+          }
+          return m;
+        });
+      }
+    },
+    removeMovieFromWatched: (state, action: PayloadAction<string>) => {
+      const movie = state.value.find(m => m.imdbID === action.payload);
+
+      if (movie) {
+        state.value = state.value.map(m => {
+          if (m.imdbID === movie.imdbID) {
+            m.IsWatched = false;
+          }
+          return m;
+        });
+      }
+    },
   },
   extraReducers: builder => {
     builder.addCase(addMovieToFavoritesByImdbId.fulfilled, (state, action) => {
@@ -41,6 +65,7 @@ export const movieSlice = createSlice({
   },
 });
 
-export const {removeFromFavorites} = movieSlice.actions;
+export const {removeFromFavorites, addMovieToWatched, removeMovieFromWatched} =
+  movieSlice.actions;
 
 export default movieSlice.reducer;

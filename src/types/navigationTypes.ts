@@ -28,7 +28,7 @@ export type DetailsModalProps = NativeStackScreenProps<
 
 export type RootTabParamList = {
   Search: undefined;
-  Explore: undefined;
+  Watched: undefined;
   Favorites: undefined;
 };
 
@@ -37,8 +37,8 @@ export type SearchScreenProps = CompositeScreenProps<
   NativeStackScreenProps<RootStackParamList>
 >;
 
-export type ExploreScreenProps = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, 'Explore'>,
+export type WatchedScreenProps = CompositeScreenProps<
+  BottomTabScreenProps<RootTabParamList, 'Watched'>,
   NativeStackScreenProps<RootStackParamList>
 >;
 

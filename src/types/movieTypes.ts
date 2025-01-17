@@ -31,4 +31,5 @@ export type Movie = {
   Production: string;
   Website: string;
   Response: string;
+  IsWatched?: boolean;
 };

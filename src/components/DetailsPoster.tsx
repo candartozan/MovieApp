@@ -6,10 +6,19 @@ type Props = {
   posterUri: string;
   back?: () => void;
   isFavorite: boolean;
+  isWatched: boolean | undefined;
   addFavorite?: () => void;
+  onWatchedPres?: () => void;
 };
 
-const DetailsPoster = ({posterUri, back, isFavorite, addFavorite}: Props) => {
+const DetailsPoster = ({
+  posterUri,
+  back,
+  isFavorite,
+  isWatched,
+  addFavorite,
+  onWatchedPres,
+}: Props) => {
   return (
     <View>
       <View className="flex-row justify-between absolute z-50 w-full px-5 mt-3">
@@ -21,13 +30,23 @@ const DetailsPoster = ({posterUri, back, isFavorite, addFavorite}: Props) => {
           />
         </TouchableWithoutFeedback>
 
-        <TouchableWithoutFeedback onPress={addFavorite}>
-          <Image
-            source={icons.star}
-            resizeMode="contain"
-            tintColor={isFavorite ? '#ffc100' : 'white'}
-          />
-        </TouchableWithoutFeedback>
+        <View className="flex-row gap-5">
+          <TouchableWithoutFeedback onPress={onWatchedPres}>
+            <Image
+              source={icons.tick}
+              resizeMode="contain"
+              tintColor={isWatched ? '#34ae58' : 'white'}
+            />
+          </TouchableWithoutFeedback>
+
+          <TouchableWithoutFeedback onPress={addFavorite}>
+            <Image
+              source={icons.star}
+              resizeMode="contain"
+              tintColor={isFavorite ? '#ffc100' : 'white'}
+            />
+          </TouchableWithoutFeedback>
+        </View>
       </View>
       <Image source={{uri: posterUri}} className="h-[400px]" />
     </View>

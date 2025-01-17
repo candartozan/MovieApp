@@ -1,18 +1,18 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SearchScreen from '@screens/rootStack/rootTab/SearchScreen';
-import ExploreScreen from '@screens/rootStack/rootTab/ExploreScreen';
 import FavoritesScreen from '@screens/rootStack/rootTab/FavoritesScreen';
 import {RootTabParamList} from '@srcTypes/navigationTypes';
 import TabBarIcon from '@components/TabBarIcon';
 import icons from '@constants/icons';
+import WatchedScreen from '@screens/rootStack/rootTab/WatchedScreen';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export default function RootTab() {
   return (
     <Tab.Navigator
-      initialRouteName="Explore"
+      initialRouteName="Search"
       screenOptions={{
         headerShown: false,
         tabBarStyle: {backgroundColor: '#001427'},
@@ -28,12 +28,12 @@ export default function RootTab() {
         }}
       />
       <Tab.Screen
-        name="Explore"
-        component={ExploreScreen}
+        name="Watched"
+        component={WatchedScreen}
         options={{
           tabBarActiveTintColor: '#f87314',
           tabBarIcon: ({color}) => (
-            <TabBarIcon icon={icons.compass} color={color} />
+            <TabBarIcon icon={icons.watched} color={color} />
           ),
         }}
       />

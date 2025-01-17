@@ -1,4 +1,4 @@
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, ActivityIndicator, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {DetailsModalProps} from '@srcTypes/navigationTypes';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -12,7 +12,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '@redux/store';
 import {
   addMovieToFavoritesByImdbId,
+  addMovieToWatched,
   removeFromFavorites,
+  removeMovieFromWatched,
 } from '../../redux/slices/movieSlice';
 
 const moviee = {
@@ -74,7 +76,17 @@ export default function DetailsModal({route, navigation}: DetailsModalProps) {
           },
         });
 
-        setMovie(res.data);
+        const favoriteMovie = movies.value.find(
+          mov => mov.imdbID === res.data.imdbID,
+        );
+
+        if (favoriteMovie?.IsWatched) {
+          setMovie({...res.data, IsWatched: true});
+        } else {
+          setMovie(res.data);
+        }
+
+        favoriteMovie && setIsFavorite(true);
       } catch (error) {
         console.log(error);
         navigation.goBack();
@@ -82,12 +94,6 @@ export default function DetailsModal({route, navigation}: DetailsModalProps) {
     };
 
     fetchMovie();
-
-    const favoriteMovie = movies.value.find(
-      mov => mov.imdbID === movie?.imdbID,
-    );
-
-    favoriteMovie && setIsFavorite(true);
   });
 
   const handleAddFavorite = () => {
@@ -100,37 +106,56 @@ export default function DetailsModal({route, navigation}: DetailsModalProps) {
     }
   };
 
-  if (!movie) return null;
+  const handleAddWatched = () => {
+    if (!movie?.IsWatched) {
+      if (!isFavorite)
+        Alert.alert(
+          'Could not be added to watched.',
+          'First you need to add it to favorites.',
+        );
+      dispatch(addMovieToWatched(movie!.imdbID));
+    } else {
+      dispatch(removeMovieFromWatched(movie.imdbID));
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-bg-color">
-      <ScrollView className="flex-1">
-        <DetailsPoster
-          posterUri={movie.Poster}
-          back={() => navigation.goBack()}
-          addFavorite={handleAddFavorite}
-          isFavorite={isFavorite}
-        />
-
-        <View className="gap-2 mx-5">
-          <Text className="text-3xl text-white mt-3">{movie.Title}</Text>
-
-          <GenreList genres={movie.Genre.split(',')} />
-
-          <Text className="text-sm text-white">
-            {movie.Runtime} - {movie.Released}
-          </Text>
-          <Text className="text-base text-white">{movie.Plot}</Text>
-
-          <Text className="text-lg text-white">
-            Director - {movie.Director}
-          </Text>
-
-          <CastList actors={movie.Actors.split(',')} />
-
-          <Rating rating={Number.parseFloat(movie.imdbRating)} />
+      {!movie ? (
+        <View className="flex-1 justify-center">
+          <ActivityIndicator size="large" color="#f87314" />
         </View>
-      </ScrollView>
+      ) : (
+        <ScrollView className="flex-1">
+          <DetailsPoster
+            posterUri={movie.Poster}
+            back={() => navigation.goBack()}
+            addFavorite={handleAddFavorite}
+            isFavorite={isFavorite}
+            onWatchedPres={handleAddWatched}
+            isWatched={movie.IsWatched}
+          />
+
+          <View className="gap-2 mx-5">
+            <Text className="text-3xl text-white mt-3">{movie.Title}</Text>
+
+            <GenreList genres={movie.Genre.split(',')} />
+
+            <Text className="text-sm text-white">
+              {movie.Runtime} - {movie.Released}
+            </Text>
+            <Text className="text-base text-white">{movie.Plot}</Text>
+
+            <Text className="text-lg text-white">
+              Director - {movie.Director}
+            </Text>
+
+            <CastList actors={movie.Actors.split(',')} />
+
+            <Rating rating={Number.parseFloat(movie.imdbRating)} />
+          </View>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 }

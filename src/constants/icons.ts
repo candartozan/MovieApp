@@ -5,5 +5,17 @@ import starHalf from '@assets/icons/starHalf.png';
 import backArrow from '@assets/icons/backArrow.png';
 import compass from '@assets/icons/compass.png';
 import search from '@assets/icons/search.png';
+import watched from '@assets/icons/watched.png';
+import tick from '@assets/icons/tick.png';
 
-export default {user, star, starEmpty, starHalf, backArrow, compass, search};
+export default {
+  user,
+  star,
+  starEmpty,
+  starHalf,
+  backArrow,
+  compass,
+  search,
+  watched,
+  tick,
+};
