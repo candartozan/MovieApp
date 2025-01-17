@@ -1,6 +1,6 @@
 import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
 import React from 'react';
-import {SearchMovieType} from '../types/movieTypes';
+import {SearchMovieType} from '@srcTypes/movieTypes';
 
 type Props = {
   movie: SearchMovieType;

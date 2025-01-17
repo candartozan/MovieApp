@@ -1,7 +1,7 @@
 import {FlatList} from 'react-native';
 import React from 'react';
 import MovieCard from './MovieCard';
-import {SearchMovieType} from '../types/movieTypes';
+import {SearchMovieType} from '@srcTypes/movieTypes';
 
 type Props = {
   movies: SearchMovieType[];

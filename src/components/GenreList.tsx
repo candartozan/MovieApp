@@ -1,6 +1,6 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import PillBadge from './PillBadge';
+import PillBadge from '@components/PillBadge';
 
 type Props = {
   genres: string[];

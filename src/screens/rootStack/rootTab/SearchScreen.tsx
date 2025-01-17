@@ -1,12 +1,12 @@
 import {View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import MovieList from '../../../components/MovieList';
-import SearchBar from '../../../components/SearchBar';
-import useDebounce from '../../../hooks/useDebounce';
-import {SearchMovieType} from '../../../types/movieTypes';
-import useAxios from '../../../hooks/useAxios';
-import {SearchScreenProps} from '../../../types/navigationTypes';
+import MovieList from '@components/MovieList';
+import SearchBar from '@components/SearchBar';
+import useDebounce from '@hooks/useDebounce';
+import {SearchMovieType} from '@srcTypes/movieTypes';
+import useAxios from '@hooks/useAxios';
+import {SearchScreenProps} from '@srcTypes/navigationTypes';
 
 export default function SearchScreen({navigation}: SearchScreenProps) {
   const [searchInput, setSearchInput] = useState('');
@@ -35,10 +35,7 @@ export default function SearchScreen({navigation}: SearchScreenProps) {
     <SafeAreaView className="flex-1 bg-bg-color">
       <View className="flex-1 mx-5">
         <SearchBar value={searchInput} onChangeText={setSearchInput} />
-        <MovieList
-          movies={movies}
-          onPressMovie={onPress}
-        />
+        <MovieList movies={movies} onPressMovie={onPress} />
       </View>
     </SafeAreaView>
   );

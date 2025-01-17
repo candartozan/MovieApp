@@ -1,6 +1,6 @@
-import {View, Text, Button} from 'react-native';
+import {View, Text} from 'react-native';
 import React from 'react';
-import {ExploreScreenProps} from '../../../types/navigationTypes';
+import {ExploreScreenProps} from '@srcTypes/navigationTypes';
 
 export default function ExploreScreen({navigation}: ExploreScreenProps) {
   return (

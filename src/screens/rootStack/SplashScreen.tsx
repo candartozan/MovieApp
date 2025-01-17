@@ -1,8 +1,8 @@
 import {View, Image, SafeAreaView} from 'react-native';
 import React from 'react';
-import {SplashScreenProps} from '../../types/navigationTypes';
-import images from '../../constants/images';
-import Button from '../../components/Button';
+import {SplashScreenProps} from '@srcTypes/navigationTypes';
+import images from '@constants/images';
+import Button from '@components/Button';
 
 export default function SplashScreen({navigation}: SplashScreenProps) {
   return (

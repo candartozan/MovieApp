@@ -1,10 +1,10 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import MovieList from '../../../components/MovieList';
+import MovieList from '@components/MovieList';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../../redux/store';
-import {FavoritesScreenProps} from '../../../types/navigationTypes';
+import {RootState} from '@redux/store';
+import {FavoritesScreenProps} from '@srcTypes/navigationTypes';
 
 export default function FavoritesScreen({navigation}: FavoritesScreenProps) {
   const movies = useSelector((state: RootState) => state.movie);

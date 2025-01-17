@@ -1,4 +1,4 @@
-import bb8 from '../assets/images/bb8.png';
+import bb8 from '@assets/images/bb8.png';
 
 export default {
   bb8,

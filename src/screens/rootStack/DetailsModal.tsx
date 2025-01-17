@@ -1,15 +1,15 @@
 import {View, Text, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {DetailsModalProps} from '../../types/navigationTypes';
+import {DetailsModalProps} from '@srcTypes/navigationTypes';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import useAxios from '../../hooks/useAxios';
-import {Movie} from '../../types/movieTypes';
-import Rating from '../../components/Rating';
-import CastList from '../../components/CastList';
-import GenreList from '../../components/GenreList';
-import DetailsPoster from '../../components/DetailsPoster';
+import useAxios from '@hooks/useAxios';
+import {Movie} from '@srcTypes/movieTypes';
+import Rating from '@components/Rating';
+import CastList from '@components/CastList';
+import GenreList from '@components/GenreList';
+import DetailsPoster from '@components/DetailsPoster';
 import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../../redux/store';
+import {AppDispatch, RootState} from '@redux/store';
 import {
   addMovieToFavoritesByImdbId,
   removeFromFavorites,

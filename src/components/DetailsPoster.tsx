@@ -1,6 +1,6 @@
-import {View, Text, Image, TouchableWithoutFeedback} from 'react-native';
+import {View, Image, TouchableWithoutFeedback} from 'react-native';
 import React from 'react';
-import icons from '../constants/icons';
+import icons from '@constants/icons';
 
 type Props = {
   posterUri: string;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import SplashScreen from '../screens/rootStack/SplashScreen';
-import RootTab from './RootTab';
-import DetailsModal from '../screens/rootStack/DetailsModal';
-import {RootStackParamList} from '../types/navigationTypes';
+import SplashScreen from '@screens/rootStack/SplashScreen';
+import RootTab from '@navigation/RootTab';
+import DetailsModal from '@screens/rootStack/DetailsModal';
+import {RootStackParamList} from '@srcTypes/navigationTypes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

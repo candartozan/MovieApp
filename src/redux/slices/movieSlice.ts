@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {PayloadAction} from '@reduxjs/toolkit';
-import {Movie} from '../../types/movieTypes';
-import useAxios from '../../hooks/useAxios';
+import {Movie} from '@srcTypes/movieTypes';
+import useAxios from '@hooks/useAxios';
 const axios = useAxios();
 
 export const addMovieToFavoritesByImdbId = createAsyncThunk(

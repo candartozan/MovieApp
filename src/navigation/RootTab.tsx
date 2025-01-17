@@ -1,11 +1,11 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import SearchScreen from '../screens/rootStack/rootTab/SearchScreen';
-import ExploreScreen from '../screens/rootStack/rootTab/ExploreScreen';
-import FavoritesScreen from '../screens/rootStack/rootTab/FavoritesScreen';
-import {RootTabParamList} from '../types/navigationTypes';
-import TabBarIcon from '../components/TabBarIcon';
-import icons from '../constants/icons';
+import SearchScreen from '@screens/rootStack/rootTab/SearchScreen';
+import ExploreScreen from '@screens/rootStack/rootTab/ExploreScreen';
+import FavoritesScreen from '@screens/rootStack/rootTab/FavoritesScreen';
+import {RootTabParamList} from '@srcTypes/navigationTypes';
+import TabBarIcon from '@components/TabBarIcon';
+import icons from '@constants/icons';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
